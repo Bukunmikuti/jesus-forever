@@ -4,7 +4,8 @@ const store = new Vuex.Store({
 	state: {
   count: 0,
   bottomBar: false,
-  loading: false, 
+  loading: false,
+  typed: '', 
   version: {
   	id: 'de4e12af7f28f599-01', 
   	name: 'King James Version', 
@@ -26,11 +27,18 @@ const store = new Vuex.Store({
 			}
 			*/
   ], 
+  saves: [
+  /* {<ref> <apiBook> <object.version☝️> <text>} */
+  ]
  },
  
  mutations: {
  	INCREMENT (state) {
    state.count++
+  }, 
+  
+  UPDATE_TYPED (state, value) {
+   state.typed = value;
   }, 
   
   SHOW_BOTTOM_BAR (state, opt) {
@@ -49,9 +57,21 @@ const store = new Vuex.Store({
   	state.object.unshift(opt);
   }, 
   
-  REMOVE_FROM_BIBLE (state, opt) {
-  	state.object.splice(opt, 1);
+  REMOVE_FROM_BIBLE (state, index) {
+  	state.object.splice(index, 1);
   }, 
+  
+  ADD_TO_SAVES (state, save) {
+  	state.saves.push(save);
+  }, 
+ 
+  REMOVE_FROM_SAVES (state, index) {
+  	state.saves.splice(index, 1);
+  }, 
+  
+  REMOVE_ALL_SAVES (state) {
+  	state.saves = [];
+  }
  }, 
  
  actions: {
@@ -64,7 +84,6 @@ const store = new Vuex.Store({
  		if (addedDiff.length > 0) {
  			addedDiff.forEach(e => {
  				commit('ADD_TO_BIBLE', e)
- 				//state.object.unshift(e);
  			})
  		}
  	
@@ -73,7 +92,6 @@ const store = new Vuex.Store({
  			removeDiff.forEach(e => {
  				let index = state.object.indexOf(e);
  				commit('REMOVE_FROM_BIBLE', index)
- 				//state.object.splice(index, 1);
  			})
  		}
  	}

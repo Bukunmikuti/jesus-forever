@@ -25,7 +25,6 @@ export default {
 	},
 	
 	computed: {
-		/*bottomBar() {return this.$store.state.isBottomBarVisible}*/
 		...Vuex.mapState(['version'])
 	}, 
 	

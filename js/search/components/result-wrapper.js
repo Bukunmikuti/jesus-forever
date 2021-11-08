@@ -13,7 +13,8 @@ const template = `
 	</div>
 	
 	<div v-cloak>
-		<result-card></result-card>
+		<result-card v-for="bible in object" :key="bible.ref" :bible="bible">
+		</result-card>
 	</div> 
 	
 </div>

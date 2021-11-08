@@ -35,7 +35,7 @@ export default class Bible {
 	 * Get abbr book for api.bible
 	 * accepts standard book - 'Psalm'
 	 * returns abbr book for API/URL - 'PSA'
-	 * The result is from 'bibleData', so it doesn't send a request from to the API
+	 * The result is from 'bibleData', so it doesn't send a request to the API
 	 */
 	static apiBook(book) {
 		for (let i = 0; i < bibleData.length; i++) {

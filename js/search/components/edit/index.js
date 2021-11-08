@@ -7,11 +7,11 @@ const template = `
 export default {
 	template,
 	created() {
-		
+		console.log(JSON.parse(JSON.stringify(this.saves)))
 	},
 	
 	computed: {
-		
+		...Vuex.mapState(['object', 'saves', 'version']),
 	},
 
 	data() {

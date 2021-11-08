@@ -12,7 +12,7 @@ const template = `
 	</select-version>
 			
 	<div class="input-wrapper ref-wrapper">
-			<input ref='refInput' id="ref-input" type="text" aria-label="Type Bible reference" placeholder="1 Timothy 1:17" autocomplete="off" @input='suggestion' @blur='closeSuggestion'/>
+			<input ref='refInput' id="ref-input" type="text" :value='typed' aria-label="Type Bible reference" placeholder="1 Timothy 1:17" autocomplete="off" @input='suggestion' @blur='closeSuggestion'/>
 		
 		<div ref='dropdownWrapper' id="ref-dropdown-wrapper" role="menu">
 			<ul ref='dropdown' id="ref-dropdown">
@@ -34,17 +34,18 @@ export default {
 
 	data() {
 		return {
-		openSelect: false, 
+		openSelect: false,
 		}
 	},
 	
 	computed: {
-		...Vuex.mapState(['version'])
+		...Vuex.mapState(['version', 'typed'])
 	}, 
 	
 	methods: {
-		suggestion() {
+		suggestion(e) {
 			this.su.suggestion();
+			this.$store.commit('UPDATE_TYPED', e.target.value)
 		}, 
 		closeSuggestion() {
 			this.su.closeSuggestion();

@@ -34,7 +34,6 @@ export default {
 	
 	methods: {
 		edit() {
-			console.log(this)
 			this.$router.push({
 				path: '/', 
 				query: {ref: 'ok'} 
