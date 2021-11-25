@@ -7,7 +7,7 @@
 
 
 body {
-	background: #f2f2f2;
+	background: white;
 }
 
 
@@ -29,6 +29,14 @@ body {
 	font-family: "Noto Sans", sans-serif;
 	font-weight: 400;
 	font-size: 1.4rem;
+	position: fixed;
+	bottom: 5%;
+	width: 90%;
+	max-width: 400px;
+	border-radius: 10px;
+	left: 50%;
+ transform: translateX(-50%);
+ z-index: 3;
 	
 	h1 {
 		font-family: "Poppins", sans-serif;
@@ -63,7 +71,7 @@ body {
 	box-shadow: 0px 0px 30px 0px #e6e6e6;
 	color: #303436;
 	font-size: 1.5rem;
-	z-index: 100;
+	z-index: 1;
 	
 	#input-container {
 		.flex(@direction: column);
@@ -119,6 +127,7 @@ body {
 		background: #f2f2f2;
 		margin-top: 10px;
 		outline: none;
+		color: #303436;
 		&:hover {
 			outline: none;
 			border-color: #4c4f67;
@@ -142,7 +151,7 @@ body {
 		width: 90%;
 		margin: 0 auto;
 		max-height: 25rem;
-		z-index: 999999;
+		z-index: 2;
 		overflow: auto;
 		height: auto;
 		font-family: "Poppins", sans-serif;
@@ -197,14 +206,15 @@ body {
 	width: 100%;
 	height: 100%;
 	background: white;
-	z-index: 10;
+	z-index: 4;
+	font-size: 1.5rem;
 	
 	.wrapper {
 		width: 100%;
 		height: 100%;
 		overflow: scroll;
 		padding-bottom: 50px;
-		padding: 0 10px;
+		padding: 0 15px;
 		&::-webkit-scrollbar {
    width: 0;  /* Remove scrollbar */
    background: transparent;
@@ -223,6 +233,7 @@ body {
 			height: 50%;
 			max-height: 600px;
 			border-radius: 15px;
+			padding: 0 20px;
 		}
 	}
 	
@@ -233,18 +244,21 @@ body {
 	 top: 0;
 		height: 80px;
 		width: 100%;
-		display: flex;
-		justify-content: space-evenly;
-		align-items: center;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-gap: 10px;
+		align-items:center;
 		z-index: 1;
+		padding-top: 10px;
 		
 		.search {
 			border: 4px solid #e2e3e9;
 			padding: 5px 10px;
-			width: 80%;
+			flex: 1;
 			height: 60px;
 			border-radius: 5px;
 			background: #f2f2f2;
+			font-size: 1.6rem;
 			&:hover {
 				outline: none;
 				border-color: #4c4f67;
@@ -264,12 +278,26 @@ body {
 		}
 	}
 	
+	#search-result {
+		h3 {
+		 font-size: 2.3rem;
+		 font-weight: 700;
+		}
+		span {
+		 font-weight: 400;
+		 font-style: italic;
+		}
+		.not-found {
+		 font-size: 1.5rem;
+		 Padding: 10px;
+		}
+	}
+	
 	main {
 		margin-top: 30px;
 		ul {
 			list-style: none;
 			padding: 0;
-			font-size: 1.5rem;
 			
 			&:before {
 				display: block;
@@ -282,7 +310,7 @@ body {
 		
 		.version {
 			padding: 10px 15px;
-			margin-top: 10px;
+			margin-top: 7px;
 			border-radius: 5px;
 			p {
 				margin: 0;
@@ -291,12 +319,12 @@ body {
 			
 			&.selected {
 				background: #F1CA41;
-				box-shadow: 0px 0px 3px 5px #f2f2f2;
+				box-shadow: 0px 0px 10px 3px #f2f2f2;
 			}
 			
 			.abbr {
 				display: inline-block;
-				background: #fdd068;
+				background: #fde09b;
 				border-radius: 15px;
 				font-weight: bold;
 				margin-left: 3px;
@@ -320,7 +348,6 @@ body {
 	
 	#empty-card {
 		width: 100%;
-		//max-width: 500px;
 		height: 150px;
 		padding: 15px;
 		border-radius: 5px;
@@ -330,11 +357,10 @@ body {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		//text-align: center;
 		color: #2b2d3b;
-		font-family: "Noto Sans", sans-serif;
+  font-family: "Noto Sans", sans-serif;
 		font-weight: 400;
-		font-size: 1.4rem;
+		font-size: 1.45rem;
 		
 	}
 }
@@ -356,7 +382,6 @@ body {
 .result {
 	width: 100%;
 	min-width: 100%;
-	//max-width: 450px;
 	min-height: 200px;
 	margin: 20px auto;
 	background: white;
@@ -364,7 +389,7 @@ body {
 	font-family: "Rubik", sans-serif;
 	box-shadow: 0px 0px 30px 0px #e6e6e6;
 	color: #303436;
-	font-size: 1.45rem;
+	font-size: 1.5rem;
 	position: relative;
 	padding: 30px 0;
 	
@@ -383,7 +408,6 @@ body {
 	.version {
 		display: inline-block;
 		text-transform: uppercase;
-		//border: 2px solid #3D4245;
 		border-radius: 5px;
 		font-weight: 400;
 		background: #f2f2f2;
@@ -433,81 +457,104 @@ body {
 }
 
 
-
 #bottom-bar {
-	width: 100%;
-	height: 6rem;
-	background: white;
-	position: fixed;
-	bottom: 0;
+ width: 100%;
+ position: fixed;
+	bottom: 5%;
+	padding: 0 25px;
 	user-select: none;
-	color: #e6e6e6;
+	color: #303436;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
-	box-shadow: 0px -0px 8px rgba(0,0,0,0.1);
-	font-family: "Lato Sans", sans-serif;
-	font-weight: 500;
-	font-size: 1.4rem;
+	font-family: "Rubik", sans-serif;
+	font-weight: 400;
+	font-size: 1.5rem;
 	letter-spacing: auto;
+	pointer-events: none;
 	
 	.btn {
-		//height: 100%;
-		font-size: 2.5rem;
+	 width: 6.6rem;
+		height: 6.6rem;
+		border-radius: 100%;
+		background: #f2f2f2;
+		font-size: 3.7rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin: 0;
-		padding: 0 10px;
+		box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.2);
+		pointer-events: auto; 
+		
 		&:hover {
 			background: #f2f2f2;
 		}
-		
-		.v {
-			dispay: block;
-			margin-top: 10px;
-		}
-		
+
 		p {
 			font-size: 1rem;
 		}
 	}
 	
 	#edit-btn {
-		width: 6.3rem;
-		height: 6.3rem;
-		box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.10);
-		transform: translateY(-17px);
-		border-radius: 100%;
-		background: white;
-		font-size: 3.5rem;
+	 background: #fbb104;
+	 color: #4b4e68;
 	}
 	
-	&.close {
-		//background: red;
-		display: none;
+	#more-tab {
+	 #more-list {
+	  position: absolute;
+	  background: #ffffff;
+	  border-radius: 15px;
+	  min-width: 200px;
+	  padding: 10px 0;
+	  bottom: 120%;
+	  box-shadow: 0px 0px 20px 0px #d9d9d9;
+	  //border: 2px solid #d9d9d9;
+	  pointer-events: auto;
+	  transform: translateY(70px);
+	  opacity: 0;
+	  visibility: hidden;
+	  transition-property: opacity, transform, visibility;
+	  transition-duration: 0.5s, 0.4s;
+	  
+	  &.open {
+	   transform: translateY(0);
+	   visibility: visible;
+	   opacity: 1;
+	  }
+	 
+	  ul {
+	   list-style-type: none;
+	   padding: 0;
+	   margin: 0;
+	  }
+	  li {
+	   padding: 10px 20px;
+	   font-size: 1.5rem;
+	   display: flex;
+	   align-items: center;
+	   span {
+	    padding-left: 10px;
+	   }
+	   .icon {
+	    display: inline-block;
+	    font-size: 1.8rem;
+	   }
+	   &:hover {
+	    background: #f2f2f2;
+	   }
+	  }
+	 }
+	 
+	 #more-btn {
+	  background: #f0f1f4;
+	  color: #4b4e68;
+	  box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.2);
+	  pointer-events: auto;
+	 }
 	}
 	
-	&:not([disabled]) {
-		.btn {
-			color: #4c4f67;
-		}
-		#edit-btn {
-		 background: #FBB408;
-		}
-	}
 }
-
-
-#compare {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: green;
-}
-
 
 
 

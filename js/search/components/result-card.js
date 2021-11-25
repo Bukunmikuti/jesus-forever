@@ -37,7 +37,7 @@ export default {
 	computed: {
 			...Vuex.mapState(['object', 'saves', 'version']),
 			
-			counter() {
+		counter() {
 			let start = parseInt(this.bibleLocal.refData.startVerse - 1)
 			return {'counter-reset': `verse-count ${start}`}
 		}, 
@@ -94,7 +94,6 @@ export default {
 				})
 			}
 		
-			//console.log(JSON.parse(JSON.stringify(this.saves)))
 		},
 		
 		verseRef(i) {
@@ -108,10 +107,11 @@ export default {
 				}
 			} else {
 				let realRef = `${data.book} ${data.chapter}:${data.startVerse + i}`
+				let extractApi = bibleLocal.apiBook.split('.').slice(0, 2).join('.')
+				let realApi = `${extractApi}.${data.startVerse + i}`
 				return {
 					ref: realRef,
-					apiBook: bibleLocal.apiBook
-					/*apiBook: `${Bible.apiBook(data.book)}.${data.chapter}.${data.startVerse + i}`*/
+					apiBook: realApi,
 				};
 			}
 		}, 

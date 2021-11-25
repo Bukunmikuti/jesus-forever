@@ -1,6 +1,6 @@
 const template = `
 <div>
-	New Route: {{this.$route.query.ref}}
+	New Route: {{query}}
 </div>
 `
 
@@ -12,6 +12,9 @@ export default {
 	
 	computed: {
 		...Vuex.mapState(['object', 'saves', 'version']),
+		query() {
+	  return this.$route.query.ref
+	 }
 	},
 
 	data() {
